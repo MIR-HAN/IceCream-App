@@ -1,12 +1,4 @@
 
-
-
-
-
-
-
-
-
 # Librarys
 - json-server
 - bootstrap 

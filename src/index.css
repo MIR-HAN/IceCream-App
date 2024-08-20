@@ -59,3 +59,19 @@ code {
   gap: 6px;
   cursor: pointer;
 }
+
+.index{
+  position: fixed;
+  width: 75%;
+  height: 75%;
+  top: 15%;
+  left: 15%; /* Space from the left side of the screen */
+  right: 15%; /* Space from the right side of the screen */
+  bottom: 15%; /* Space from the bottom of the screen */
+  background-color: #fff;
+  padding: 1rem; /* Adjust padding as needed */
+  z-index: 1050; /* Ensure it appears above other content */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  box-shadow: 2px 4px 6px rgba(247, 241, 241, 0.5);
+opacity: 97%; }
+

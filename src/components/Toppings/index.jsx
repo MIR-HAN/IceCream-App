@@ -6,6 +6,8 @@ const Toppings = () => {
 
   const [basket,setBasket]=useState([]);
 
+
+  console.log(basket)
   useEffect(() => {
 
     axios

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Card from '../Card/Index'
-
+import Basket from '../Basket/index'
 
 
 const Scoops = () => {
@@ -9,6 +9,9 @@ const Scoops = () => {
 
   const [basket, setBasket] = useState([]);
 
+  const totalPrice = basket.reduce((total, i) => total + i.amount, 0)
+
+  console.log(totalPrice)
   useEffect(() => {
 
     axios
@@ -20,7 +23,21 @@ const Scoops = () => {
   // add items to basket
 
   const addToBasket = (item) => {
-    setBasket([...basket, item]);
+
+    const found = basket.find((i) => i.id === item.id)
+
+    if (found) {
+
+      const updated = { ...found, amount: found.amount + 1 };
+
+      const newBasket = basket.map((i) => (i.id === updated.id ? updated : i))
+
+      setBasket(newBasket)
+
+    } else {
+      setBasket(basket.concat({ ...item, amount: 1 }));
+
+    }
   }
 
   // remove item from basket
@@ -31,16 +48,43 @@ const Scoops = () => {
     setBasket(filtered)
   }
 
+  //descent the basket amount
+  const decreaseAmount = (delete_id) => {
+
+    const found = basket.find((i) => i.id === delete_id)
+
+    if (found.amount > 1) {
+
+      const updated = { ...found, amount: found.amount - 1 };
+
+      const newBasket = basket.map((i) => (i.id === updated.id ? updated : i))
+
+      setBasket(newBasket)
+    } else {
+      clearFromBasket(delete_id)
+    }
+
+  }
+
+  const getItemAmount = (item) => {
+    const found = basket.find((i) => i.id === item.id);
+    return found ? found.amount : 0;
+  };
 
   return (
     <div className=' mb-5'>
+      <Basket
+        basket={basket}
+        addToBasket={addToBasket}
+        clearFromBasket={clearFromBasket}
+        decreaseAmount={decreaseAmount}
+      />
 
-     
       <h1> Flavors </h1>
       <p> Price for each  <span className='text-success'>5</span>€</p>
       <h3>
         Ice creams total prices: {" "}
-        <span data-testid="total" className='text-success'>{basket.length * 5}</span>€
+        <span data-testid="total" className='text-success'>{totalPrice * 5}</span>€
       </h3>
 
       <div className='row gap-5 justify-content-between mt-4'>
@@ -50,7 +94,7 @@ const Scoops = () => {
             item={i}
             addToBasket={addToBasket}
             clearFromBasket={clearFromBasket}
-            amount={basket.filter((item) => item.name == i.name).length}
+            amount={getItemAmount(i)}
           /></div>
 
         ))}

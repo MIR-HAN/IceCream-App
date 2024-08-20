@@ -1,7 +1,8 @@
 import React from 'react'
 
-const Card = ({item, amount, addToBasket, clearFromBasket}) => {
+const Card = ({item, addToBasket, clearFromBasket, amount}) => {
   
+
   return (
     <div style={{width:"200px"}} 
     className='d-flex flex-column align-items-center gap-1 border
