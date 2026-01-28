@@ -13,6 +13,7 @@ Website is coded with JSX CSS/BOOTSRAP & REACT.JS
 - axios@^0.27.2
 - @testing-library/user-event@14.0
 - react-icons
+- Jest
 
 <h2>Screen </h2>
 

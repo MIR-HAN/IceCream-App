@@ -3,10 +3,8 @@ import { render, screen } from "@testing-library/react";
 import Card from "."
 import userEvent from "@testing-library/user-event";
 
-
-
 const item = {
-    id:"122",
+    id: "122",
     name: "Vanilla",
     imagePath: "/images/vanilla.png"
 }
@@ -45,13 +43,8 @@ test("quantity, title and photo are renders according to the incoming prop",
 const addMockFn = jest.fn();
 const clearMockFn = jest.fn();
 test("When buttons are clicked, functions are called with the correct parameters.",
-
-
     async () => {
-       
-
         const user = userEvent.setup();
-
         render(<Card
             item={item}
             amount={0}
@@ -68,9 +61,9 @@ test("When buttons are clicked, functions are called with the correct parameters
         // did addTobasket works with proper parameters
         expect(addMockFn).toHaveBeenCalledWith(item)
         // click reset button
-await user.click(resetBtn)
+        await user.click(resetBtn)
         // did addTobasket works with proper parameters
-expect(clearMockFn).toHaveBeenCalledWith(item.id)
+        expect(clearMockFn).toHaveBeenCalledWith(item.id)
 
     }
 
